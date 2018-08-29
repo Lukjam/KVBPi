@@ -13,7 +13,7 @@ df = pd.read_html(str(table))
 print(df[0].to_json(orient='records'))
 line = df[0].values.tolist()
 dir_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-with open(dir_path+'/DataObjects/example.csv', 'w') as examplefile:
+with open(dir_path+'/Data/example.csv', 'w') as examplefile:
     wr = csv.writer(examplefile, quoting=csv.QUOTE_ALL)
     wr.writerow(line)
 print(line)
