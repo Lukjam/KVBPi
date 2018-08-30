@@ -1,1 +1,6 @@
-"['Hürth-Hermülheim', nan, nan]","['18', 'Bonn Hbf', '2\xa0Min']","['18', 'Thielenbruch', '14\xa0Min']","['18', 'Schwadorf', '33\xa0Min']"
+,0,1,2
+0,Hürth-Hermülheim,,
+1,18,Thielenbruch,16 Min
+2,E,Thielenbruch,34 Min
+3,18,Bonn Hbf,49 Min
+4,18,Buchheim,54 Min
