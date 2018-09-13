@@ -1,25 +1,80 @@
+import kivy
+
+kivy.require('1.10.0')
 from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
+from kivy.lang import Builder
+from kivy.clock import Clock
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+Builder.load_string("""
+<FirstScreen>:
+    name: '_first_screen_'
+    Label:
+        id: first_screen
+        text: "Hi I'm The First Screen"
+<SecondScreen>:
+    name: '_second_screen_'
+    Label:
+        id: second_screen
+        text: "Hi I'm The Second Screen"
+<ThirdScreen>:
+    name: '_third_screen_'
+    Label:
+        id: third_screen
+        text: "Hi I'm The Third Screen"
+<FourthScreen>:
+    name: '_fourth_screen_'
+    Label:
+        id: fourth_screen
+        text: "Hi I'm The Fourth Screen"
+""")
 
 
-class AbfahrtAnzeige(GridLayout):
-
-    def __init__(self, **kwargs):
-        super(AbfahrtAnzeige, self).__init__(**kwargs)
-        self.cols = 3
-        self.add_widget(Label(text='User Name'))
-        self.add_widget(self.username)
-        self.add_widget(Label(text='password'))
-        self.add_widget(self.password)
+class FirstScreen(Screen):
+    pass
 
 
-class MyApp(App):
+class SecondScreen(Screen):
+    pass
+
+
+class ThirdScreen(Screen):
+    pass
+
+
+class FourthScreen(Screen):
+    pass
+
+
+sm = ScreenManager()
+sm.add_widget(FirstScreen())
+sm.add_widget(SecondScreen())
+sm.add_widget(ThirdScreen())
+sm.add_widget(FourthScreen())
+
+
+class SwitchingScreenApp(App):
 
     def build(self):
-        return AbfahrtAnzeige()
+        Clock.schedule_once(self.screen_switch_one, 2)
+        Clock.schedule_once(self.screen_switch_two, 4)
+        Clock.schedule_once(self.screen_switch_three, 6)
+        Clock.schedule_once(self.screen_switch_four, 8)
+        # Want to place the code here that changes the first_screen text to "Hi I'm The Fifth Screen"
+        Clock.schedule_once(self.screen_switch_one, 10)
+        return sm
+
+    def screen_switch_one(a, b):
+        sm.current = '_first_screen_'
+
+    def screen_switch_two(a, b):
+        sm.current = '_second_screen_'
+
+    def screen_switch_three(a, b):
+        sm.current = '_third_screen_'
+
+    def screen_switch_four(a, b):
+        sm.current = '_fourth_screen_'
 
 
-if __name__ == '__main__':
-    MyApp().run()
+SwitchingScreenApp().run()
